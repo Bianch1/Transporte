@@ -24,7 +24,7 @@ class Ocupacao(models.Model):
 
 
 class Tipo(models.Model):
-    nome = models.CharField(max_length=100, verbose_name="Nome do tipo")
+    nome = models.CharField(max_length=100, verbose_name="Tipo de transporte")
 
     def __str__(self):
         return self.nome
@@ -150,18 +150,3 @@ class Gasto(models.Model):
     class Meta:
         verbose_name = "Gasto"
         verbose_name_plural = "Gastos"
-
-
-class Relatorio(models.Model):
-    data = models.DateField(verbose_name="Data")
-    tipo = models.ForeignKey(Tipo, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Tipo")
-    frequencia = models.ForeignKey(Frequencia, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Frequência")
-    ocorrencia = models.ForeignKey(Ocorrencia, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Ocorrência")
-    gasto = models.ForeignKey(Gasto, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Gasto")
-
-    def __str__(self):
-        return f"Relatório de {self.data}"
-
-    class Meta:
-        verbose_name = "Relatório"
-        verbose_name_plural = "Relatórios"

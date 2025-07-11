@@ -22,5 +22,7 @@ from app.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', IndexView.as_view(), name='index'),
+    path('cidades/', CidadesView.as_view(), name='cidades'),
+    path('pessoas/', PessoasView.as_view(), name='pessoas'),
 ]
 
