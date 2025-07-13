@@ -24,5 +24,14 @@ urlpatterns = [
     path('', IndexView.as_view(), name='index'),
     path('cidades/', CidadesView.as_view(), name='cidades'),
     path('pessoas/', PessoasView.as_view(), name='pessoas'),
+    path('ocupacoes/', OcupacoesView.as_view(), name='ocupacoes'),
+    path('veiculos/', VeiculosView.as_view(), name='veiculos'),
+    path('tipo/',TiposTransporteView.as_view(), name='Tipos de Transporte'),
+    path('rotas/', RotasView.as_view(), name='rotas'),
+    path('instituicoes/',InstituicoesView.as_view(), name='instituicoes'),
+    path('frequencias/', FrequenciasView.as_view(), name='frequencias'),
+    path('horarios/', HorariosView.as_view(), name='horarios'),
+    path('ocorrencias/', OcorrenciasView.as_view(), name='ocorrencias'),
+    path('gastos/',GastosView.as_view(), name='gastos'),
 ]
 

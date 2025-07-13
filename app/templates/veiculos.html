@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sistema de Transporte</title>
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Veículos</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-success">
@@ -34,15 +33,31 @@
   </nav>
 
   <div class="container mt-5">
-    <div class="jumbotron text-center">
-      <h1 class="display-4">Bem-vindo ao Sistema de Transporte</h1>
-      <p class="lead">Gerencie pessoas, rotas, veículos e muito mais.</p>
-      <hr class="my-4">
-      <p>Use o menu acima para navegar pelas funcionalidades do sistema.</p>
-    </div>
+    <h2 class="mb-4">Lista de Veículos</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Placa</th>
+          <th scope="col">Marca</th>
+          <th scope="col">Modelo</th>
+          <th scope="col">Ano</th>
+          <th scope="col">Capacidade</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for veiculo in veiculos %}
+        <tr>
+          <td>{{ veiculo.placa }}</td>
+          <td>{{ veiculo.marca }}</td>
+          <td>{{ veiculo.modelo }}</td>
+          <td>{{ veiculo.ano }}</td>
+          <td>{{ veiculo.capacidade }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </div>
 
-  <!-- JS do Bootstrap e dependências -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
