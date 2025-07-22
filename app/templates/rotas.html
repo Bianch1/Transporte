@@ -38,16 +38,20 @@
       <thead>
         <tr>
           <th scope="col">Nome</th>
-          <th scope="col">Descrição</th>
+          <th scope="col">Cidade</th>
+          <th scope="col">Bairro</th>
           <th scope="col">Instituição</th>
+          <th scope="col">Veículo</th>
         </tr>
       </thead>
       <tbody>
         {% for rota in rotas %}
         <tr>
           <td>{{ rota.nome }}</td>
-          <td>{{ rota.descricao }}</td>
+          <td>{{ rota.cidade }}</td>
+          <td>{{ rota.bairro }}</td>
           <td>{{ rota.instituicao.nome }}</td>
+          <td>{{ rota.veiculo }}</td>
         </tr>
         {% endfor %}
       </tbody>
