@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Cidade(models.Model):
     nome = models.CharField(max_length=100, verbose_name="Nome da cidade")
@@ -87,7 +88,6 @@ class Rota(models.Model):
     bairro = models.CharField(max_length=100, verbose_name="Bairro")
     instituicao = models.ForeignKey(Instituicao, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Instituição")
     veiculo = models.ForeignKey(Veiculo, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Veículo")
-    pessoa = models.ForeignKey(Pessoa, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Pessoa")
 
     def __str__(self):
         return self.nome
@@ -150,3 +150,18 @@ class Gasto(models.Model):
     class Meta:
         verbose_name = "Gasto"
         verbose_name_plural = "Gastos"
+
+
+
+
+
+# class Chat(models.Model):
+#     pessoa = models.ForeignKey(Pessoa, on_delete=models.PROTECT, related_name='chats')
+#     mensagem = models.TextField()
+#     criado_em = models.DateTimeField(auto_now_add=True)
+
+#     class Meta:
+#         ordering = ['-criado_em']
+
+#     def __str__(self):
+#         return f"{self.pessoa.nome} — {self.criado_em:%d/%m/%Y %H:%M}"

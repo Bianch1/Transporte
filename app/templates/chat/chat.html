@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <title>Chat — Administração</title>
+  <style>
+    body { font-family: Arial, sans-serif; background:#f5f7fb; margin:0; padding:20px; }
+    .container { max-width:1000px; margin:0 auto; display:flex; gap:20px; }
+    .left, .right { background:white; padding:16px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.06); }
+    .left { flex: 1 1 60%; max-height:80vh; overflow:auto; }
+    .right { width:360px; flex: 0 0 360px; }
+    h1 { margin-top:0; }
+    .chat-item { border-bottom:1px solid #eee; padding:10px 0; }
+    .meta { color:#666; font-size:0.9em; margin-top:6px; }
+    label { display:block; margin-top:10px; font-weight:600; }
+    input[type=text], select, textarea { width:100%; padding:8px; border:1px solid #ccc; border-radius:4px; box-sizing:border-box; }
+    textarea { resize:vertical; }
+    button { margin-top:10px; padding:10px 14px; border-radius:6px; border:none; background:#007bff; color:white; cursor:pointer;}
+    .small-form { margin-top:20px; padding-top:10px; border-top:1px dashed #eee; }
+    .empty { color:#666; }
+    .topbar { margin-bottom:12px; display:flex; justify-content:space-between; align-items:center; }
+    a.logout { color:#007bff; text-decoration:none; font-size:0.9em; }
+    .notice { background:#fff3cd; padding:10px; border-radius:4px; color:#856404; margin-bottom:12px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="left">
+      <div class="topbar">
+        <h1>Registros (Chat)</h1>
+        <div>
+          <span>Usuário: <strong>{{ request.user.username }}</strong></span>
+          <a class="logout" href="/admin/logout/?next=/">Sair</a>
+        </div>
+      </div>
+
+      {% if chats %}
+        {% for c in chats %}
+          <div class="chat-item">
+            <div><strong>{{ c.pessoa.nome }}</strong></div>
+            <div style="margin-top:6px;">{{ c.mensagem|linebreaksbr }}</div>
+            <div class="meta">Registrado em: {{ c.criado_em|date:"d/m/Y H:i" }}</div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p class="empty">Nenhum registro de chat ainda.</p>
+      {% endif %}
+    </div>
+
+    <div class="right">
+      <div>
+        <h2>Adicionar Chat</h2>
+
+        {% if pessoas %}
+          <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="form_type" value="chat">
+            <label for="id_pessoa">Quem está registrando?</label>
+            {{ chat_form.pessoa }}
+            <label for="id_mensagem">Mensagem</label>
+            {{ chat_form.mensagem }}
+            <button type="submit">Salvar</button>
+          </form>
+        {% else %}
+          <div class="notice">
+            Não há pessoas cadastradas. Primeiro adicione uma pessoa abaixo.
+          </div>
+
+          <label>Quem está registrando?</label>
+          <select disabled><option>-- sem pessoas --</option></select>
+          <label>Mensagem</label>
+          <textarea rows="4" disabled></textarea>
+          <button disabled>Salvar</button>
+        {% endif %}
+
+        <div class="small-form">
+          <h3>Adicionar Pessoa</h3>
+          <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="form_type" value="pessoa">
+            <label for="id_nome">Nome</label>
+            {{ pessoa_form.nome }}
+            <button type="submit">Adicionar Pessoa</button>
+          </form>
+        </div>
+
+        <div style="margin-top:14px; font-size:0.9em; color:#666;">
+          Dica: ao adicionar uma Pessoa, ela aparecerá no campo "Quem está registrando".
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

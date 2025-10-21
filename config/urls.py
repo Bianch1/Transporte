@@ -22,6 +22,8 @@ from app.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', IndexView.as_view(), name='index'),
+
+    # Demais Urls
     path('cidades/', CidadesView.as_view(), name='cidades'),
     path('pessoas/', PessoasView.as_view(), name='pessoas'),
     path('ocupacoes/', OcupacoesView.as_view(), name='ocupacoes'),
@@ -33,5 +35,6 @@ urlpatterns = [
     path('horarios/', HorariosView.as_view(), name='horarios'),
     path('ocorrencias/', OcorrenciasView.as_view(), name='ocorrencias'),
     path('gastos/',GastosView.as_view(), name='gastos'),
-]
 
+    # path('chat/', chat, name='chat'),   # /chat/
+]

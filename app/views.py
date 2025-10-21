@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from .models import *
+from .forms import *
 from django.views import View
 from django.contrib import messages
 
@@ -73,3 +74,55 @@ class GastosView(View):
     def get(self, request, *args, **kwargs):
         gastos = Gasto.objects.all()
         return render(request, 'gastos.html', {'gastos': gastos})
+    
+
+
+
+
+
+
+
+# # Alterações feias para criar o chat
+# from django.shortcuts import render, redirect
+# from django.contrib.auth.decorators import login_required, user_passes_test
+
+# def staff_required(user):
+#     return user.is_active and user.is_staff
+
+# @login_required
+# @user_passes_test(staff_required)
+# def chat(request):
+#     """
+#     Página única: lista de chats + formulário para adicionar Chat + formulário para adicionar Pessoa.
+#     Acesso restrito a staff (admin).
+#     """
+#     chats = Chat.objects.select_related('pessoa').all()
+#     pessoas = Pessoa.objects.all().order_by('nome')
+
+#     if request.method == 'POST':
+#         form_type = request.POST.get('form_type')
+#         if form_type == 'chat':
+#             chat_form = ChatForm(request.POST)
+#             pessoa_form = PessoaForm()
+#             if chat_form.is_valid():
+#                 chat_form.save()
+#                 return redirect('chat:pagina')
+#         elif form_type == 'pessoa':
+#             pessoa_form = PessoaForm(request.POST)
+#             chat_form = ChatForm()
+#             if pessoa_form.is_valid():
+#                 pessoa_form.save()
+#                 return redirect('chat:pagina')
+#         else:
+#             chat_form = ChatForm()
+#             pessoa_form = PessoaForm()
+#     else:
+#         chat_form = ChatForm()
+#         pessoa_form = PessoaForm()
+
+#     return render(request, 'chat/chat.html', {
+#         'chats': chats,
+#         'pessoas': pessoas,
+#         'chat_form': chat_form,
+#         'pessoa_form': pessoa_form,
+#     })
